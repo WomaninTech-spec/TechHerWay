@@ -39,9 +39,14 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4" />,
-        IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4" />,
+        CaptionLabel: () => <></>,
       }}
+      footer={
+        <div className="flex justify-center items-center space-x-2">
+          <ChevronLeft className="h-4 w-4" />
+          <ChevronRight className="h-4 w-4" />
+        </div>
+      }
       {...props}
     />
   );

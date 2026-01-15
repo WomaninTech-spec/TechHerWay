@@ -3,11 +3,11 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { BottomNav } from '@/components/ui/bottom-nav';
-import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign, ExternalLink } from 'lucide-react';
+import { ArrowLeft, MapPin, Clock, DollarSign, ExternalLink } from 'lucide-react';
 
 export default function JobDetail() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id: _id } = useParams();
 
   const job = {
     title: 'Développeuse Web Junior',
@@ -44,10 +44,10 @@ export default function JobDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 pb-24">
       <div className="max-w-md mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
+        <div className="bg-linear-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
           <Button
             variant="ghost"
             onClick={() => navigate('/jobs')}
@@ -160,7 +160,7 @@ export default function JobDetail() {
           </Card>
 
           {/* Benefits */}
-          <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
+          <Card className="p-6 bg-linear-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
             <h2 className="text-lg font-semibold text-gray-900 mb-3">
               Avantages
             </h2>
@@ -176,7 +176,7 @@ export default function JobDetail() {
 
           {/* Apply Button */}
           <Button
-            className="w-full h-14 text-lg rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-lg"
+            className="w-full h-14 text-lg rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-lg"
             onClick={() => {}}
           >
             Postuler maintenant

@@ -40,10 +40,10 @@ export default function GroupThread() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 pb-24">
       <div className="max-w-md mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
+        <div className="bg-linear-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
           <Button
             variant="ghost"
             onClick={() => navigate('/community')}
@@ -66,7 +66,7 @@ export default function GroupThread() {
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
                   <Avatar className="w-10 h-10">
-                    <AvatarFallback className="bg-gradient-to-br from-purple-400 to-pink-400 text-white font-semibold">
+                    <AvatarFallback className="bg-linear-to-br from-purple-400 to-pink-400 text-white font-semibold">
                       {post.author.charAt(0)}
                     </AvatarFallback>
                   </Avatar>
@@ -76,7 +76,7 @@ export default function GroupThread() {
                         {post.author}
                       </span>
                       {post.isMentor && (
-                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:from-purple-600 hover:to-pink-500 text-xs">
+                        <Badge className="bg-linear-to-r from-purple-600 to-pink-500 text-white hover:from-purple-600 hover:to-pink-500 text-xs">
                           Mentor
                         </Badge>
                       )}
@@ -106,7 +106,7 @@ export default function GroupThread() {
 
         {/* Floating Action Button */}
         <Button
-          className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-2xl z-40"
+          className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-2xl z-40"
           onClick={() => {}}
         >
           <Plus className="w-6 h-6" />

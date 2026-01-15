@@ -66,10 +66,10 @@ export default function CareerPath() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 pb-24">
       <div className="max-w-md mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
+        <div className="bg-linear-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
           <Button
             variant="ghost"
             onClick={() => navigate('/dashboard')}
@@ -101,9 +101,9 @@ export default function CareerPath() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3 flex-1">
                       {isCompleted ? (
-                        <CheckCircle2 className="w-6 h-6 text-green-500 flex-shrink-0" />
+                        <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0" />
                       ) : (
-                        <div className="w-6 h-6 rounded-full border-2 border-purple-500 flex items-center justify-center flex-shrink-0">
+                        <div className="w-6 h-6 rounded-full border-2 border-purple-500 flex items-center justify-center shrink-0">
                           <span className="text-xs font-bold text-purple-600">
                             {stepIndex + 1}
                           </span>
@@ -116,7 +116,7 @@ export default function CareerPath() {
                         <div className="flex items-center gap-2 mt-1">
                           <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-gradient-to-r from-purple-600 to-pink-500 transition-all duration-300"
+                              className="h-full bg-linear-to-r from-purple-600 to-pink-500 transition-all duration-300"
                               style={{ width: `${progress}%` }}
                             />
                           </div>
@@ -127,9 +127,9 @@ export default function CareerPath() {
                       </div>
                     </div>
                     {isExpanded ? (
-                      <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0 ml-2" />
+                      <ChevronUp className="w-5 h-5 text-gray-400 shrink-0 ml-2" />
                     ) : (
-                      <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0 ml-2" />
+                      <ChevronDown className="w-5 h-5 text-gray-400 shrink-0 ml-2" />
                     )}
                   </div>
                 </div>

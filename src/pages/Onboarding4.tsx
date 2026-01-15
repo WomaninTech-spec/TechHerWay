@@ -39,7 +39,7 @@ export default function Onboarding4() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
       <div className="max-w-md mx-auto">
         <ProgressIndicator currentStep={4} totalSteps={4} />
         
@@ -66,7 +66,7 @@ export default function Onboarding4() {
                 >
                   <div className="flex items-center gap-4">
                     <div className={`p-3 rounded-full ${
-                      isSelected ? 'bg-gradient-to-r from-purple-600 to-pink-500' : 'bg-gray-100'
+                      isSelected ? 'bg-linear-to-r from-purple-600 to-pink-500' : 'bg-gray-100'
                     }`}>
                       <Clock className={`w-6 h-6 ${isSelected ? 'text-white' : 'text-gray-600'}`} />
                     </div>
@@ -85,7 +85,7 @@ export default function Onboarding4() {
           <Button
             onClick={handleFinish}
             disabled={!selected}
-            className="w-full h-14 text-lg rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            className="w-full h-14 text-lg rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
             Créer mon parcours
           </Button>

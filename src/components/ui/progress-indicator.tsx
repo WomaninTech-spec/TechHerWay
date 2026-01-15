@@ -11,7 +11,7 @@ export function ProgressIndicator({ currentStep, totalSteps }: ProgressIndicator
           key={index}
           className={`h-2 rounded-full transition-all duration-300 ${
             index < currentStep
-              ? 'w-8 bg-gradient-to-r from-purple-600 to-pink-500'
+              ? 'w-8 bg-linear-to-r from-purple-600 to-pink-500'
               : 'w-2 bg-gray-300'
           }`}
         />

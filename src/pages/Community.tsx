@@ -44,10 +44,10 @@ export default function Community() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 pb-24">
       <div className="max-w-md mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
+        <div className="bg-linear-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
           <h1 className="text-2xl font-bold text-white mb-2">
             Communauté
           </h1>
@@ -64,7 +64,7 @@ export default function Community() {
               alt="Community"
               className="w-full h-48 object-cover"
             />
-            <div className="p-4 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div className="p-4 bg-linear-to-br from-purple-50 to-pink-50">
               <p className="text-center text-gray-700 font-medium">
                 Tu n'es pas seule dans ton parcours 💜
               </p>
@@ -135,7 +135,7 @@ export default function Community() {
 
         {/* Floating Action Button */}
         <Button
-          className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-2xl z-40"
+          className="fixed bottom-24 right-6 w-14 h-14 rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-2xl z-40"
           onClick={() => {}}
         >
           <Plus className="w-6 h-6" />

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +7,6 @@ import { ArrowLeft, Star, Calendar, Award, Users } from 'lucide-react';
 
 export default function MentorProfile() {
   const navigate = useNavigate();
-  const { id } = useParams();
 
   const mentor = {
     name: 'Amélie Dubois',
@@ -28,10 +27,10 @@ export default function MentorProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 pb-24">
       <div className="max-w-md mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
+        <div className="bg-linear-to-r from-purple-600 to-pink-500 p-6 shadow-lg">
           <Button
             variant="ghost"
             onClick={() => navigate('/mentors')}
@@ -119,7 +118,7 @@ export default function MentorProfile() {
           {/* CTA Buttons */}
           <div className="space-y-3">
             <Button
-              className="w-full h-14 text-lg rounded-full bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-lg"
+              className="w-full h-14 text-lg rounded-full bg-linear-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-lg"
               onClick={() => {}}
             >
               <Calendar className="mr-2 w-5 h-5" />

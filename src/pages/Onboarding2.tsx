@@ -53,7 +53,7 @@ export default function Onboarding2() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
       <div className="max-w-md mx-auto">
         <ProgressIndicator currentStep={2} totalSteps={4} />
         
@@ -83,7 +83,7 @@ export default function Onboarding2() {
                   <div className="flex items-center gap-4">
                     <div className={`p-3 rounded-full ${
                       isSelected
-                        ? 'bg-gradient-to-r from-purple-600 to-pink-500'
+                        ? 'bg-linear-to-r from-purple-600 to-pink-500'
                         : 'bg-gray-100'
                     }`}>
                       <Icon className={`w-6 h-6 ${
@@ -96,7 +96,7 @@ export default function Onboarding2() {
                       {objective.label}
                     </span>
                     {isSelected && (
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full bg-linear-to-r from-purple-600 to-pink-500 flex items-center justify-center">
                         <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                         </svg>
@@ -111,7 +111,7 @@ export default function Onboarding2() {
           <Button
             onClick={handleNext}
             disabled={selected.length === 0}
-            className="w-full h-14 text-lg rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            className="w-full h-14 text-lg rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
             Continuer
           </Button>

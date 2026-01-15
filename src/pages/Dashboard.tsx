@@ -30,10 +30,10 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 pb-24">
       <div className="max-w-md mx-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-500 p-6 rounded-b-3xl shadow-lg">
+        <div className="bg-linear-to-r from-purple-600 to-pink-500 p-6 rounded-b-3xl shadow-lg">
           <h1 className="text-2xl font-bold text-white mb-2">
             {/* 3. Utilisation de la variable dynamique ici ! */}
             Bonjour, {userName} ! 👋
@@ -51,7 +51,7 @@ export default function Dashboard() {
                 <h2 className="text-lg font-semibold text-gray-900">
                   Ta progression
                 </h2>
-                <span className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                   35%
                 </span>
               </div>
@@ -63,7 +63,7 @@ export default function Dashboard() {
           </Card>
 
           {/* Next Step Card */}
-          <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-300 shadow-lg">
+          <Card className="p-6 bg-linear-to-br from-purple-50 to-pink-50 border-2 border-purple-300 shadow-lg">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-purple-600" />
@@ -76,7 +76,7 @@ export default function Dashboard() {
               </p>
               <Button
                 onClick={() => navigate('/career-path')}
-                className="w-full h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-md"
+                className="w-full h-12 rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-md"
               >
                 Commencer
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -90,7 +90,7 @@ export default function Dashboard() {
             className="p-6 cursor-pointer hover:shadow-xl transition-shadow border border-gray-200"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-gradient-to-br from-purple-100 to-pink-100">
+              <div className="p-3 rounded-full bg-linear-to-br from-purple-100 to-pink-100">
                 <Users className="w-6 h-6 text-purple-600" />
               </div>
               <div className="flex-1">
@@ -134,7 +134,7 @@ export default function Dashboard() {
             className="p-6 cursor-pointer hover:shadow-xl transition-shadow border border-gray-200"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-gradient-to-br from-green-100 to-emerald-100">
+              <div className="p-3 rounded-full bg-linear-to-br from-green-100 to-emerald-100">
                 <Briefcase className="w-6 h-6 text-green-600" />
               </div>
               <div className="flex-1">

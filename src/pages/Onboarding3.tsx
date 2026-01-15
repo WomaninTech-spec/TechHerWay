@@ -1,82 +1,82 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from "@/lib/supabase";
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input'; // Assure-toi que ce composant existe
 import { ProgressIndicator } from '@/components/ui/progress-indicator';
-import { Code, Database, Layers, Palette } from 'lucide-react';
+import { User } from 'lucide-react';
 
 export default function Onboarding3() {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState<string>('');
+  const [firstName, setFirstName] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const roles = [
-    { id: 'dev', label: 'Développeuse web', icon: Code, color: 'from-blue-500 to-cyan-500' },
-    { id: 'data', label: 'Data analyst', icon: Database, color: 'from-green-500 to-emerald-500' },
-    { id: 'product', label: 'Product manager', icon: Layers, color: 'from-orange-500 to-amber-500' },
-    { id: 'ux', label: 'UX/UI designer', icon: Palette, color: 'from-pink-500 to-rose-500' },
-  ];
+  const handleNext = async () => {
+    if (!firstName) return;
+    setLoading(true);
 
-  const handleNext = () => {
-    if (selected) {
+    try {
+      // On récupère l'utilisateur actuel (auth)
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        // On sauvegarde le prénom dans la table profiles
+        const { error } = await supabase
+          .from('profiles')
+          .upsert({ 
+            id: user.id, 
+            first_name: firstName,
+            updated_at: new Date() 
+          });
+
+        if (error) throw error;
+      }
+      
+      // On passe à l'étape finale (le temps disponible)
       navigate('/onboarding/4');
+    } catch (error) {
+      console.error("Erreur de sauvegarde:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
       <div className="max-w-md mx-auto">
         <ProgressIndicator currentStep={3} totalSteps={4} />
         
-        <div className="mt-8 space-y-6">
-          <div className="space-y-2">
+        <div className="mt-12 space-y-8">
+          <div className="text-center space-y-2">
+            <div className="mx-auto w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+              <User className="w-8 h-8 text-purple-600" />
+            </div>
             <h1 className="text-3xl font-bold text-gray-900">
-              Quel métier vises-tu ?
+              Comment t'appelles-tu ?
             </h1>
-            <p className="text-sm text-gray-500">
-              Tu pourras changer plus tard
+            <p className="text-gray-600">
+              On préfère les prénoms, c'est plus convivial !
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            {roles.map((role) => {
-              const Icon = role.icon;
-              const isSelected = selected === role.id;
-              
-              return (
-                <Card
-                  key={role.id}
-                  onClick={() => setSelected(role.id)}
-                  className={`p-6 cursor-pointer transition-all duration-200 ${
-                    isSelected
-                      ? 'border-2 border-purple-500 shadow-lg scale-105'
-                      : 'border border-gray-200 hover:border-purple-300 hover:shadow-md'
-                  }`}
-                >
-                  <div className="flex flex-col items-center gap-4 text-center">
-                    <div className={`p-4 rounded-2xl bg-gradient-to-br ${
-                      isSelected ? role.color : 'from-gray-100 to-gray-200'
-                    }`}>
-                      <Icon className={`w-8 h-8 ${
-                        isSelected ? 'text-white' : 'text-gray-600'
-                      }`} />
-                    </div>
-                    <span className={`text-base font-semibold ${
-                      isSelected ? 'text-purple-700' : 'text-gray-700'
-                    }`}>
-                      {role.label}
-                    </span>
-                  </div>
-                </Card>
-              );
-            })}
+          <div className="space-y-4">
+            <div className="relative">
+              <Input
+                type="text"
+                placeholder="Ton prénom"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="h-14 text-lg border-2 border-purple-100 focus:border-purple-500 rounded-xl px-4"
+              />
+            </div>
           </div>
 
           <Button
             onClick={handleNext}
-            disabled={!selected}
-            className="w-full h-14 text-lg rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            disabled={!firstName || loading}
+            className="w-full h-14 text-lg rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-lg transition-all"
           >
-            Continuer
+            {loading ? "Chargement..." : "Continuer"}
           </Button>
         </div>
       </div>
