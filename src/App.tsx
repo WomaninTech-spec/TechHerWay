@@ -32,7 +32,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
-      <BrowserRouter basename="/TechHerWay">
+      <BrowserRouter>
         <Routes>
           {/* Public */}
           <Route path="/" element={<LandingPage />} />
