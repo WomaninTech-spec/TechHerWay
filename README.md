@@ -68,7 +68,7 @@ Build artifacts include a `404.html` fallback so React Router handles all client
 
 ## About
 
-Built by [Barbara Teslar](https://github.com/WomaninTech-spec) — Platform Engineering Manager pivoting into AI.  
-Part of the [TechHerWay](https://techherway.org) initiative.
+Created and owned by [Barbara Teslar](https://github.com/WomaninTech-spec) — Platform Engineering Manager pivoting into AI.  
+Founder of [TechHerWay](https://techherway.org).
 
 > This repository is **not open source**. All rights reserved.
