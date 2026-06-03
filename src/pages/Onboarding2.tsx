@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// 1. On ajoute l'import Supabase
-import { supabase } from "@/lib/supabase"; 
+import { useTranslation } from 'react-i18next';
+import { supabase } from "@/lib/supabase";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ProgressIndicator } from '@/components/ui/progress-indicator';
@@ -9,34 +9,33 @@ import { Target, TrendingUp, Heart, RefreshCw, Lightbulb } from 'lucide-react';
 
 export default function Onboarding2() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<string[]>([]);
 
-  // 2. Fonction pour sauvegarder les objectifs
   const saveObjectives = async () => {
     const { data: { user } } = await supabase.auth.getUser();
 
     if (user) {
       const { error } = await supabase
         .from('profiles')
-        .upsert({ 
-          id: user.id, 
-          objectives: selected, // On enregistre le tableau d'objectifs
-          updated_at: new Date() 
+        .upsert({
+          id: user.id,
+          objectives: selected,
+          updated_at: new Date()
         });
 
       if (error) console.error("Erreur lors de la sauvegarde des objectifs:", error);
     }
-    
-    // On avance à l'étape suivante
+
     navigate('/onboarding/3');
   };
 
   const objectives = [
-    { id: 'job', label: 'Trouver mon premier job tech', icon: Target },
-    { id: 'skills', label: 'Monter en compétences', icon: TrendingUp },
-    { id: 'legitimate', label: 'Me sentir légitime et accompagnée', icon: Heart },
-    { id: 'change', label: 'Changer de spécialité', icon: RefreshCw },
-    { id: 'project', label: 'Construire un projet', icon: Lightbulb },
+    { id: 'job', label: t('onboarding.obj_job'), icon: Target },
+    { id: 'skills', label: t('onboarding.obj_skills'), icon: TrendingUp },
+    { id: 'legitimate', label: t('onboarding.obj_legitimate'), icon: Heart },
+    { id: 'change', label: t('onboarding.obj_change'), icon: RefreshCw },
+    { id: 'project', label: t('onboarding.obj_project'), icon: Lightbulb },
   ];
 
   const toggleObjective = (id: string) => {
@@ -47,7 +46,6 @@ export default function Onboarding2() {
 
   const handleNext = () => {
     if (selected.length > 0) {
-      // 3. On appelle la sauvegarde avant de naviguer
       saveObjectives();
     }
   };
@@ -56,20 +54,20 @@ export default function Onboarding2() {
     <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
       <div className="max-w-md mx-auto">
         <ProgressIndicator currentStep={2} totalSteps={4} />
-        
+
         <div className="mt-8 space-y-6">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold text-gray-900">
-              Quel est ton objectif principal ?
+              {t('onboarding.step2title')}
             </h1>
-            <p className="text-gray-600">Plusieurs choix possibles</p>
+            <p className="text-gray-600">{t('onboarding.step2subtitle')}</p>
           </div>
 
           <div className="space-y-4">
             {objectives.map((objective) => {
               const Icon = objective.icon;
               const isSelected = selected.includes(objective.id);
-              
+
               return (
                 <Card
                   key={objective.id}
@@ -113,7 +111,7 @@ export default function Onboarding2() {
             disabled={selected.length === 0}
             className="w-full h-14 text-lg rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
-            Continuer
+            {t('onboarding.continue')}
           </Button>
         </div>
       </div>

@@ -1,14 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Home, Users, Briefcase, User } from 'lucide-react';
 
 export function BottomNav() {
   const location = useLocation();
-  
+  const { t } = useTranslation();
+
   const navItems = [
-    { path: '/dashboard', icon: Home, label: 'Parcours' },
-    { path: '/community', icon: Users, label: 'Communauté' },
-    { path: '/jobs', icon: Briefcase, label: 'Opportunités' },
-    { path: '/profile', icon: User, label: 'Profil' },
+    { path: '/dashboard', icon: Home, label: t('bottomNav.journey') },
+    { path: '/community', icon: Users, label: t('bottomNav.community') },
+    { path: '/jobs', icon: Briefcase, label: t('bottomNav.jobs') },
+    { path: '/profile', icon: User, label: t('bottomNav.profile') },
   ];
 
   return (
@@ -17,7 +19,7 @@ export function BottomNav() {
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
           const Icon = item.icon;
-          
+
           return (
             <Link
               key={item.path}

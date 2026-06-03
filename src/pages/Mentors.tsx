@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +8,7 @@ import { ArrowLeft, Star, Calendar } from 'lucide-react';
 
 export default function Mentors() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const mentors = [
     {
@@ -14,7 +16,7 @@ export default function Mentors() {
       name: 'Amélie Dubois',
       role: 'Senior Developer',
       expertise: ['React', 'JavaScript', 'Node.js'],
-      experience: '8 ans d\'expérience',
+      experience: t('mentors.experience', { years: 8 }),
       rating: 4.9,
       sessions: 156,
       available: true,
@@ -25,7 +27,7 @@ export default function Mentors() {
       name: 'Sophie Martin',
       role: 'Lead Data Analyst',
       expertise: ['Python', 'SQL', 'Data Viz'],
-      experience: '6 ans d\'expérience',
+      experience: t('mentors.experience', { years: 6 }),
       rating: 4.8,
       sessions: 98,
       available: true,
@@ -36,7 +38,7 @@ export default function Mentors() {
       name: 'Laura Chen',
       role: 'Product Manager',
       expertise: ['Product', 'Agile', 'UX'],
-      experience: '5 ans d\'expérience',
+      experience: t('mentors.experience', { years: 5 }),
       rating: 4.7,
       sessions: 72,
       available: false,
@@ -55,13 +57,13 @@ export default function Mentors() {
             className="text-white hover:bg-white/20 mb-4 -ml-2"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
-            Retour
+            {t('mentors.back')}
           </Button>
           <h1 className="text-2xl font-bold text-white mb-2">
-            Trouve ta mentor
+            {t('mentors.title')}
           </h1>
           <p className="text-purple-100">
-            Bénéficie d'un accompagnement personnalisé
+            {t('mentors.subtitle')}
           </p>
         </div>
 
@@ -69,28 +71,22 @@ export default function Mentors() {
           {/* Intro Card */}
           <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              Pourquoi un mentorat ?
+              {t('mentors.whyTitle')}
             </h3>
             <ul className="space-y-2">
-              <li className="flex items-start gap-2 text-gray-700">
-                <span className="text-purple-600 mt-1">✓</span>
-                <span>Conseils personnalisés pour ton parcours</span>
-              </li>
-              <li className="flex items-start gap-2 text-gray-700">
-                <span className="text-purple-600 mt-1">✓</span>
-                <span>Retours d'expérience concrets</span>
-              </li>
-              <li className="flex items-start gap-2 text-gray-700">
-                <span className="text-purple-600 mt-1">✓</span>
-                <span>Réseau professionnel dans la tech</span>
-              </li>
+              {[0, 1, 2].map((i) => (
+                <li key={i} className="flex items-start gap-2 text-gray-700">
+                  <span className="text-purple-600 mt-1">✓</span>
+                  <span>{t(`mentors.benefit${i}`)}</span>
+                </li>
+              ))}
             </ul>
           </Card>
 
           {/* Mentors List */}
           <div className="space-y-4">
             <h2 className="text-xl font-bold text-gray-900">
-              Mentors disponibles
+              {t('mentors.availableTitle')}
             </h2>
 
             {mentors.map((mentor) => (
@@ -137,11 +133,11 @@ export default function Mentors() {
                     {mentor.available ? (
                       <div className="flex items-center gap-1.5 text-green-600 text-sm font-medium">
                         <Calendar className="w-4 h-4" />
-                        <span>Disponible</span>
+                        <span>{t('mentors.availableNow')}</span>
                       </div>
                     ) : (
                       <div className="text-gray-500 text-sm">
-                        Prochaine dispo dans 2 semaines
+                        {t('mentors.nextAvail')}
                       </div>
                     )}
                   </div>

@@ -1,62 +1,39 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowRight, Menu, X } from 'lucide-react';
-
-const features = [
-  {
-    icon: '🎯',
-    title: 'Personalized Career Path',
-    description:
-      'A step-by-step roadmap tailored to where you are and where you want to go — frontend, data, DevOps, or product.',
-  },
-  {
-    icon: '👩‍💼',
-    title: 'Real Mentors',
-    description:
-      '1:1 sessions with engineers and managers who made the switch themselves. Honest advice, no gatekeeping.',
-  },
-  {
-    icon: '💬',
-    title: 'Community',
-    description:
-      'A space where asking "where do I start?" is always welcome. Study groups and peer accountability.',
-  },
-  {
-    icon: '💼',
-    title: 'Job Board',
-    description:
-      'Curated opportunities from companies that actively invest in diversity and support career changers.',
-  },
-];
-
-const steps = [
-  {
-    number: '01',
-    title: 'Tell us your goal',
-    description: 'Answer a few questions about your background and the tech role you\'re aiming for.',
-  },
-  {
-    number: '02',
-    title: 'Follow your path',
-    description: 'Access curated resources, milestones, and mentors matched to your profile.',
-  },
-  {
-    number: '03',
-    title: 'Land your first role',
-    description: 'Apply to jobs with confidence — your profile shows your progress, not just your past.',
-  },
-];
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState<FormState>('idle');
   const waitlistRef = useRef<HTMLElement>(null);
+
+  const features = [
+    { icon: '🎯', title: t('features.item0title'), description: t('features.item0desc') },
+    { icon: '👩‍💼', title: t('features.item1title'), description: t('features.item1desc') },
+    { icon: '💬', title: t('features.item2title'), description: t('features.item2desc') },
+    { icon: '💼', title: t('features.item3title'), description: t('features.item3desc') },
+  ];
+
+  const steps = [
+    { number: '01', title: t('steps.step0title'), description: t('steps.step0desc') },
+    { number: '02', title: t('steps.step1title'), description: t('steps.step1desc') },
+    { number: '03', title: t('steps.step2title'), description: t('steps.step2desc') },
+  ];
+
+  const problems = [
+    { icon: '😮‍💨', title: t('problem.item0title'), body: t('problem.item0body') },
+    { icon: '🤐', title: t('problem.item1title'), body: t('problem.item1body') },
+    { icon: '🎭', title: t('problem.item2title'), body: t('problem.item2body') },
+  ];
 
   const scrollTo = (ref: React.RefObject<HTMLElement | null>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
@@ -97,20 +74,21 @@ export default function LandingPage() {
               onClick={() => scrollTo(waitlistRef)}
               className="text-sm text-gray-600 hover:text-purple-600 transition-colors"
             >
-              How it works
+              {t('nav.howItWorks')}
             </button>
             <button
               onClick={() => scrollTo(waitlistRef)}
               className="text-sm text-gray-600 hover:text-purple-600 transition-colors"
             >
-              Features
+              {t('nav.features')}
             </button>
+            <LanguageSwitcher className="border-gray-300 text-gray-600 hover:border-purple-400 hover:text-purple-600" />
             <Button
               onClick={() => scrollTo(waitlistRef)}
               size="sm"
               className="rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white border-0"
             >
-              Join waitlist
+              {t('nav.joinWaitlist')}
             </Button>
           </div>
           {/* Mobile menu button */}
@@ -125,16 +103,17 @@ export default function LandingPage() {
         {menuOpen && (
           <div className="sm:hidden px-6 pb-4 flex flex-col gap-4 border-t border-purple-100 bg-white">
             <button onClick={() => scrollTo(waitlistRef)} className="text-sm text-gray-600 text-left pt-3">
-              How it works
+              {t('nav.howItWorks')}
             </button>
             <button onClick={() => scrollTo(waitlistRef)} className="text-sm text-gray-600 text-left">
-              Features
+              {t('nav.features')}
             </button>
+            <LanguageSwitcher className="self-start border-gray-300 text-gray-600" />
             <Button
               onClick={() => scrollTo(waitlistRef)}
               className="rounded-full bg-gradient-to-r from-purple-600 to-pink-500 text-white border-0"
             >
-              Join waitlist
+              {t('nav.joinWaitlist')}
             </Button>
           </div>
         )}
@@ -148,19 +127,18 @@ export default function LandingPage() {
 
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-sm font-medium mb-8">
-            <span>🚀</span> Now in early development · Join the waitlist
+            {t('hero.badge')}
           </div>
 
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight mb-6">
-            Build your tech career,{' '}
+            {t('hero.title1')}{' '}
             <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-              your way.
+              {t('hero.title2')}
             </span>
           </h1>
 
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-            TechHerWay is the platform for women transitioning into tech — with structured learning
-            paths, real mentors, and a community that truly gets it.
+            {t('hero.description')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -169,7 +147,7 @@ export default function LandingPage() {
               size="lg"
               className="rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white border-0 shadow-lg hover:shadow-xl h-14 px-8 text-lg"
             >
-              Join the waitlist →
+              {t('hero.cta')}
             </Button>
             <Button
               onClick={() => navigate('/app')}
@@ -177,11 +155,11 @@ export default function LandingPage() {
               size="lg"
               className="rounded-full border-2 border-purple-200 text-purple-700 hover:bg-purple-50 h-14 px-8 text-lg"
             >
-              Preview the app
+              {t('hero.preview')}
             </Button>
           </div>
 
-          <p className="mt-6 text-sm text-gray-400">Free to join · No credit card required</p>
+          <p className="mt-6 text-sm text-gray-400">{t('hero.free')}</p>
         </div>
       </section>
 
@@ -189,31 +167,14 @@ export default function LandingPage() {
       <section className="py-20 px-6 bg-gray-950 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-            Most career platforms weren't built for you.
+            {t('problem.title')}
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-16">
-            They assume you already have a CS degree, a network in tech, and time to figure it out
-            alone. Career changers — especially women — deserve something better.
+            {t('problem.description')}
           </p>
 
           <div className="grid sm:grid-cols-3 gap-6 text-left">
-            {[
-              {
-                icon: '😮‍💨',
-                title: 'Overwhelming entry points',
-                body: '"Should I learn Python or JavaScript first?" Generic advice leads to months of spinning wheels.',
-              },
-              {
-                icon: '🤐',
-                title: 'No one to ask',
-                body: 'Stack Overflow is great if you know what to search. Bootcamps end. Communities go quiet.',
-              },
-              {
-                icon: '🎭',
-                title: 'Imposter syndrome by design',
-                body: "Spaces built by and for people who've never had to prove they belong aren't built for you.",
-              },
-            ].map((item) => (
+            {problems.map((item) => (
               <div key={item.title} className="p-6 rounded-2xl bg-gray-900 border border-gray-800">
                 <div className="text-3xl mb-4">{item.icon}</div>
                 <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
@@ -229,10 +190,10 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Everything you need to make the switch
+              {t('features.title')}
             </h2>
             <p className="text-gray-500 text-lg max-w-xl mx-auto">
-              One platform. No juggling ten tabs and hoping for the best.
+              {t('features.subtitle')}
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -255,9 +216,9 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              From "where do I start?" to hired.
+              {t('steps.title')}
             </h2>
-            <p className="text-gray-500 text-lg">Three steps. One clear path.</p>
+            <p className="text-gray-500 text-lg">{t('steps.subtitle')}</p>
           </div>
           <div className="space-y-8">
             {steps.map((step) => (
@@ -278,7 +239,7 @@ export default function LandingPage() {
               size="lg"
               className="rounded-full bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white border-0 shadow-lg h-14 px-10 text-lg"
             >
-              Start your journey <ArrowRight className="ml-2 w-5 h-5" />
+              {t('steps.cta')} <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
         </div>
@@ -288,16 +249,15 @@ export default function LandingPage() {
       <section ref={waitlistRef} className="py-24 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <div className="p-10 sm:p-14 rounded-3xl bg-gradient-to-br from-purple-600 to-pink-500 text-white shadow-2xl">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Be the first to know.</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">{t('waitlist.title')}</h2>
             <p className="text-purple-100 text-lg mb-8">
-              The platform is in development. Join the waitlist to get early access and help shape
-              what we build.
+              {t('waitlist.description')}
             </p>
 
             {formState === 'success' ? (
               <div className="bg-white/20 rounded-2xl p-6">
-                <p className="text-xl font-semibold">🎉 You're on the list!</p>
-                <p className="text-purple-100 mt-2 text-sm">We'll reach out when early access opens.</p>
+                <p className="text-xl font-semibold">{t('waitlist.successTitle')}</p>
+                <p className="text-purple-100 mt-2 text-sm">{t('waitlist.successMessage')}</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -305,7 +265,7 @@ export default function LandingPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
+                  placeholder={t('waitlist.placeholder')}
                   required
                   className="flex-1 px-5 py-3 rounded-full text-gray-900 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
                 />
@@ -314,15 +274,15 @@ export default function LandingPage() {
                   disabled={formState === 'submitting'}
                   className="px-6 py-3 rounded-full bg-white text-purple-600 font-semibold hover:bg-purple-50 border-0 whitespace-nowrap disabled:opacity-70 h-auto"
                 >
-                  {formState === 'submitting' ? 'Sending…' : 'Join waitlist →'}
+                  {formState === 'submitting' ? t('waitlist.sending') : t('waitlist.button')}
                 </Button>
               </form>
             )}
 
             {formState === 'error' && (
-              <p className="mt-3 text-sm text-pink-200">Something went wrong. Try again?</p>
+              <p className="mt-3 text-sm text-pink-200">{t('waitlist.error')}</p>
             )}
-            <p className="mt-4 text-purple-200 text-sm">No spam. Unsubscribe anytime.</p>
+            <p className="mt-4 text-purple-200 text-sm">{t('waitlist.noSpam')}</p>
           </div>
         </div>
       </section>
@@ -335,7 +295,7 @@ export default function LandingPage() {
               TechHerWay
             </span>
             <p className="text-gray-400 text-sm mt-1">
-              Built by{' '}
+              {t('footer.builtBy')}{' '}
               <a
                 href="https://womanintech-spec.github.io/barbarateslar-portfolio"
                 className="hover:text-purple-600 transition-colors"

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -8,44 +9,45 @@ import { ChevronDown, ChevronUp, ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export default function CareerPath() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [expandedStep, setExpandedStep] = useState<number | null>(0);
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
 
   const steps = [
     {
-      title: 'Étape 1 : Bases',
+      title: t('careerPath.step0title'),
       items: [
-        'Comprendre HTML et structure web',
-        'Apprendre CSS et mise en page',
-        'Introduction à JavaScript',
-        'Créer ta première page web',
+        t('careerPath.step0item0'),
+        t('careerPath.step0item1'),
+        t('careerPath.step0item2'),
+        t('careerPath.step0item3'),
       ],
     },
     {
-      title: 'Étape 2 : Projet simple',
+      title: t('careerPath.step1title'),
       items: [
-        'Concevoir un portfolio personnel',
-        'Utiliser Git et GitHub',
-        'Responsive design avec CSS',
-        'Déployer ton site en ligne',
+        t('careerPath.step1item0'),
+        t('careerPath.step1item1'),
+        t('careerPath.step1item2'),
+        t('careerPath.step1item3'),
       ],
     },
     {
-      title: 'Étape 3 : Approfondissement',
+      title: t('careerPath.step2title'),
       items: [
-        'Frameworks JavaScript (React)',
-        'APIs et données dynamiques',
-        'Bases de données',
-        'Projet web interactif',
+        t('careerPath.step2item0'),
+        t('careerPath.step2item1'),
+        t('careerPath.step2item2'),
+        t('careerPath.step2item3'),
       ],
     },
     {
-      title: 'Étape 4 : Préparation emploi',
+      title: t('careerPath.step3title'),
       items: [
-        'Optimiser ton portfolio',
-        'Préparer ton CV tech',
-        'Entretiens techniques',
-        'Networking et candidatures',
+        t('careerPath.step3item0'),
+        t('careerPath.step3item1'),
+        t('careerPath.step3item2'),
+        t('careerPath.step3item3'),
       ],
     },
   ];
@@ -76,13 +78,13 @@ export default function CareerPath() {
             className="text-white hover:bg-white/20 mb-4 -ml-2"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
-            Retour
+            {t('careerPath.back')}
           </Button>
           <h1 className="text-2xl font-bold text-white">
-            Parcours Développeuse Web
+            {t('careerPath.title')}
           </h1>
           <p className="text-purple-100 mt-2">
-            Suis ton chemin vers ton premier job tech
+            {t('careerPath.subtitle')}
           </p>
         </div>
 
@@ -167,7 +169,7 @@ export default function CareerPath() {
                       variant="outline"
                       className="w-full mt-4 border-purple-300 text-purple-700 hover:bg-purple-50"
                     >
-                      Voir les ressources
+                      {t('careerPath.viewResources')}
                     </Button>
                   </div>
                 )}

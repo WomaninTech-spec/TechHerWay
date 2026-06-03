@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { supabase } from "@/lib/supabase";
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,18 +10,16 @@ import { ArrowRight, Users, Briefcase, Sparkles } from 'lucide-react';
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  
-  // 1. Déclaration de l'état (le prénom)
-  const [userName, setUserName] = useState("Elise"); // "Elise" par défaut le temps du chargement
+  const { t } = useTranslation();
+  const [userName, setUserName] = useState("Elise");
 
-  // 2. Récupération des données depuis Supabase
   useEffect(() => {
     const fetchProfile = async () => {
       const { data, error } = await supabase
         .from('profiles')
         .select('first_name')
         .single();
-      
+
       if (data && !error) {
         setUserName(data.first_name);
       }
@@ -35,11 +34,10 @@ export default function Dashboard() {
         {/* Header */}
         <div className="bg-linear-to-r from-purple-600 to-pink-500 p-6 rounded-b-3xl shadow-lg">
           <h1 className="text-2xl font-bold text-white mb-2">
-            {/* 3. Utilisation de la variable dynamique ici ! */}
-            Bonjour, {userName} ! 👋
+            {t('dashboard.greeting', { name: userName })}
           </h1>
           <p className="text-purple-100">
-            Prête à continuer ton parcours ?
+            {t('dashboard.subtitle')}
           </p>
         </div>
 
@@ -49,7 +47,7 @@ export default function Dashboard() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-semibold text-gray-900">
-                  Ta progression
+                  {t('dashboard.progressTitle')}
                 </h2>
                 <span className="text-2xl font-bold bg-linear-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                   35%
@@ -57,7 +55,7 @@ export default function Dashboard() {
               </div>
               <Progress value={35} className="h-3" />
               <p className="text-sm text-gray-600">
-                Continue comme ça ! Tu es sur la bonne voie 🚀
+                {t('dashboard.progressMsg')}
               </p>
             </div>
           </Card>
@@ -68,17 +66,17 @@ export default function Dashboard() {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-purple-600" />
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Prochaine étape
+                  {t('dashboard.nextStepTitle')}
                 </h3>
               </div>
               <p className="text-base text-gray-700 font-medium">
-                Découvrir les bases HTML
+                {t('dashboard.nextStepContent')}
               </p>
               <Button
                 onClick={() => navigate('/career-path')}
                 className="w-full h-12 rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 shadow-md"
               >
-                Commencer
+                {t('dashboard.start')}
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
@@ -95,10 +93,10 @@ export default function Dashboard() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Trouver une mentor
+                  {t('dashboard.mentorTitle')}
                 </h3>
                 <p className="text-sm text-gray-600">
-                  Bénéficie d'un accompagnement personnalisé
+                  {t('dashboard.mentorSubtitle')}
                 </p>
               </div>
               <ArrowRight className="w-5 h-5 text-gray-400" />
@@ -118,10 +116,10 @@ export default function Dashboard() {
               />
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Communauté
+                  {t('dashboard.communityTitle')}
                 </h3>
                 <p className="text-sm text-purple-600 font-medium">
-                  3 discussions actives
+                  {t('dashboard.communityActive')}
                 </p>
               </div>
               <ArrowRight className="w-5 h-5 text-gray-400" />
@@ -139,10 +137,10 @@ export default function Dashboard() {
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Opportunités
+                  {t('dashboard.jobsTitle')}
                 </h3>
                 <p className="text-sm text-green-600 font-medium">
-                  2 offres adaptées à ton profil
+                  {t('dashboard.jobsMatched')}
                 </p>
               </div>
               <ArrowRight className="w-5 h-5 text-gray-400" />

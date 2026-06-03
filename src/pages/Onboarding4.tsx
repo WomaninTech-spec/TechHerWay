@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from "@/lib/supabase"; // Import indispensable
+import { useTranslation } from 'react-i18next';
+import { supabase } from "@/lib/supabase";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ProgressIndicator } from '@/components/ui/progress-indicator';
@@ -8,47 +9,46 @@ import { Clock } from 'lucide-react';
 
 export default function Onboarding4() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<string>('');
 
   const handleFinish = async () => {
     if (!selected) return;
 
-    // Sauvegarde du temps disponible
     const { data: { user } } = await supabase.auth.getUser();
-    
+
     if (user) {
       await supabase
         .from('profiles')
-        .upsert({ 
-          id: user.id, 
+        .upsert({
+          id: user.id,
           availability: selected,
-          onboarding_completed: true, // Marqueur pour dire que c'est fini
-          updated_at: new Date() 
+          onboarding_completed: true,
+          updated_at: new Date()
         });
     }
 
-    // Direction le dashboard !
     navigate('/dashboard');
   };
 
   const timeRanges = [
-    { id: 'less5', label: '< 5h', description: 'Quelques moments par semaine' },
-    { id: '5-10', label: '5–10h', description: 'Régulièrement chaque semaine' },
-    { id: '10-20', label: '10–20h', description: 'Plusieurs heures par jour' },
-    { id: 'more20', label: '+20h', description: 'Temps plein ou presque' },
+    { id: 'less5', label: '< 5h', description: t('onboarding.time_less5') },
+    { id: '5-10', label: '5–10h', description: t('onboarding.time_5-10') },
+    { id: '10-20', label: '10–20h', description: t('onboarding.time_10-20') },
+    { id: 'more20', label: '+20h', description: t('onboarding.time_more20') },
   ];
 
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
       <div className="max-w-md mx-auto">
         <ProgressIndicator currentStep={4} totalSteps={4} />
-        
+
         <div className="mt-8 space-y-6">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold text-gray-900">
-              Combien de temps peux-tu consacrer par semaine ?
+              {t('onboarding.step4title')}
             </h1>
-            <p className="text-gray-600">Cela nous aide à adapter ton parcours</p>
+            <p className="text-gray-600">{t('onboarding.step4subtitle')}</p>
           </div>
 
           <div className="space-y-4">
@@ -87,7 +87,7 @@ export default function Onboarding4() {
             disabled={!selected}
             className="w-full h-14 text-lg rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
-            Créer mon parcours
+            {t('onboarding.finish')}
           </Button>
         </div>
       </div>

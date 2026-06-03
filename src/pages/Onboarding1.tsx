@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// AJOUTE CET IMPORT ICI
-import { supabase } from "@/lib/supabase"; 
+import { useTranslation } from 'react-i18next';
+import { supabase } from "@/lib/supabase";
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ProgressIndicator } from '@/components/ui/progress-indicator';
@@ -9,39 +9,36 @@ import { GraduationCap, Rocket, Briefcase, Heart } from 'lucide-react';
 
 export default function Onboarding1() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<string>('');
 
-  // Cette fonction sera super utile quand tu demanderas le prénom (ex: Onboarding étape 2 ou 3)
   const handleSaveSituation = async (situationId: string) => {
-    // On récupère l'utilisateur actuel
-    const { data: { user } } = await supabase.auth.getUser(); 
+    const { data: { user } } = await supabase.auth.getUser();
 
     if (user) {
       const { error } = await supabase
         .from('profiles')
-        .upsert({ 
-          id: user.id, 
-          situation: situationId, // On enregistre sa situation
-          updated_at: new Date() 
+        .upsert({
+          id: user.id,
+          situation: situationId,
+          updated_at: new Date()
         });
 
       if (error) console.error("Erreur d'enregistrement:", error);
     }
-    
-    // On passe à la suite même si pas connecté pour le test
+
     navigate('/onboarding/2');
   };
 
   const situations = [
-    { id: 'reconversion', label: 'Je me reconvertis vers la tech', icon: GraduationCap },
-    { id: 'debutante', label: 'Je débute dans la tech', icon: Rocket },
-    { id: 'travaille', label: 'Je travaille déjà dans la tech', icon: Briefcase },
-    { id: 'mentor', label: 'Je veux devenir mentor', icon: Heart },
+    { id: 'reconversion', label: t('onboarding.sit_reconversion'), icon: GraduationCap },
+    { id: 'debutante', label: t('onboarding.sit_debutante'), icon: Rocket },
+    { id: 'travaille', label: t('onboarding.sit_travaille'), icon: Briefcase },
+    { id: 'mentor', label: t('onboarding.sit_mentor'), icon: Heart },
   ];
 
   const handleNext = () => {
     if (selected) {
-      // On appelle la sauvegarde ici
       handleSaveSituation(selected);
     }
   };
@@ -50,14 +47,14 @@ export default function Onboarding1() {
     <div className="min-h-screen bg-linear-to-br from-purple-50 via-white to-pink-50 p-6 pb-24">
       <div className="max-w-md mx-auto">
         <ProgressIndicator currentStep={1} totalSteps={4} />
-        
+
         <div className="mt-8 space-y-6">
           <div className="space-y-2">
             <h1 className="text-3xl font-bold text-gray-900">
-              Où en es-tu aujourd'hui ?
+              {t('onboarding.step1title')}
             </h1>
             <p className="text-gray-600">
-              Sélectionne ta situation actuelle
+              {t('onboarding.step1subtitle')}
             </p>
           </div>
 
@@ -100,7 +97,7 @@ export default function Onboarding1() {
             disabled={!selected}
             className="w-full h-14 text-lg rounded-full bg-linear-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
           >
-            Continuer
+            {t('onboarding.continue')}
           </Button>
         </div>
       </div>
