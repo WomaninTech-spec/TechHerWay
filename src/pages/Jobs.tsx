@@ -85,7 +85,8 @@ export default function Jobs() {
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs text-gray-500">{isFr ? 'Sources :' : 'Sources:'}</span>
             <Badge className="bg-green-100 text-green-700 hover:bg-green-100 text-xs">Greenhouse</Badge>
-            <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-100 text-xs">+ WTTJ bientôt</Badge>
+            <Badge className="bg-orange-100 text-orange-700 hover:bg-orange-100 text-xs">WTTJ</Badge>
+            <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-100 text-xs">LinkedIn</Badge>
           </div>
 
           {/* Jobs list */}
